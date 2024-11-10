@@ -7,12 +7,14 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ShellModule } from './shell/shell.module';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ShellModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
