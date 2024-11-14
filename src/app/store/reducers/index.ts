@@ -6,9 +6,12 @@ import {
   createSelector,
   MetaReducer,
 } from '@ngrx/store';
+import * as fromBook from '../../reducers/book.reducer';
 
-export interface State {}
+export interface State {  [fromBook.booksFeatureKey]: fromBook.State;
+}
 
-export const reducers: ActionReducerMap<State> = {};
+export const reducers: ActionReducerMap<State> = {  [fromBook.booksFeatureKey]: fromBook.reducer,
+};
 
 export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];

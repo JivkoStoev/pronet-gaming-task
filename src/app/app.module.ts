@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ShellModule } from './shell/shell.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, HomeComponent],
@@ -22,6 +23,7 @@ import { HomeComponent } from './home/home.component';
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     BrowserAnimationsModule,
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],
