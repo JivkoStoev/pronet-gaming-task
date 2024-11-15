@@ -3,13 +3,12 @@ import { Store } from '@ngrx/store';
 import { BookActions } from '../actions/book.actions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class BookFacadeService {
+export class BookFacade {
+  constructor(private store: Store) {}
 
-  constructor(private store: Store) { }
-
-  loadBooks(){
-    this.store.dispatch(BookActions.loadBooks())
+  loadBooks() {
+    this.store.dispatch(BookActions.loadBooks());
   }
 }

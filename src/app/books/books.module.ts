@@ -8,7 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from '../store/effects/book.effects';
 
 @NgModule({
-  declarations: [BooksListComponent, BooksFavoritesComponent],
-  imports: [CommonModule, BooksRoutingModule, EffectsModule.forFeature([BookEffects])],
+  declarations: [BooksFavoritesComponent],
+  imports: [
+    CommonModule,
+    BooksRoutingModule,
+    EffectsModule.forFeature([BookEffects]),
+    BooksListComponent,
+  ],
 })
 export class BooksModule {}

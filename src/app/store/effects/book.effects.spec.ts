@@ -5,15 +5,12 @@ import { Observable } from 'rxjs';
 import { BookEffects } from './book.effects';
 
 describe('BookEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<unknown>;
   let effects: BookEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        BookEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [BookEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(BookEffects);
