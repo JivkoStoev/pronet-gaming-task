@@ -6,10 +6,13 @@ import { Book } from '../models/book.model';
 import { BookListItemComponent } from '../book-list-item/book-list-item.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { BookFacade } from 'src/app/store/facades/book-facade';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('BooksListComponent', () => {
   let component: BooksListComponent;
   let fixture: ComponentFixture<BooksListComponent>;
+  let mockBookFacade: jasmine.SpyObj<BookFacade>;
 
   const mockBooks: Book[] = [
     {
@@ -43,10 +46,21 @@ describe('BooksListComponent', () => {
   ];
 
   beforeEach(() => {
+    mockBookFacade = jasmine.createSpyObj('BookFacade', [
+      'getAllBooks$',
+      'loadBooks',
+      'isFavorite$',
+    ]);
+    mockBookFacade.getAllBooks$ = of(mockBooks);
+
     TestBed.configureTestingModule({
       declarations: [],
       imports: [BooksListComponent, BookListItemComponent, CommonModule],
-      providers: [{ provide: ActivatedRoute, useValue: { params: of({}) } }],
+      providers: [
+        { provide: ActivatedRoute, useValue: { params: of({}) } },
+        provideMockStore(),
+        { provide: BookFacade, useValue: mockBookFacade },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BooksListComponent);

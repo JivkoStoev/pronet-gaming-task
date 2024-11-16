@@ -16,7 +16,14 @@
     <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions>
-    <a mat-raised-button [routerLink]="['details/' + book.id]">View Details</a>
-    <button class="favourite-btn" mat-icon-button><mat-icon>favorite</mat-icon></button>
+    <a mat-raised-button [routerLink]="['/books/details/' + book.id]">View Details</a>
+    <button class="favorite-btn" (click)="toggleFavorite()" mat-icon-button>
+      <mat-icon
+        [ngClass]="{
+          'favorite-icon': isFavorite$ | async,
+        }"
+        >favorite</mat-icon
+      >
+    </button>
   </mat-card-actions>
 </mat-card>

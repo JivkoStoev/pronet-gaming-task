@@ -13,6 +13,9 @@ export const BookActions = createActionGroup({
     'Load Book By Id Success': props<{ book: Book }>(),
     'Load Book By Id Failure': props<{ error: HttpErrorResponse }>(),
 
+    'Add Favorite Book': props<{ bookId: number }>(),
+    'Remove Favorite Book': props<{ bookId: number }>(),
+
     'Set Books Filter': props<{ filter: string }>(),
   },
 });

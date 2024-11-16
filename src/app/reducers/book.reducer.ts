@@ -9,6 +9,7 @@ export const booksFeatureKey = 'books';
 export interface BookState extends EntityState<Book> {
   loading: boolean;
   filter: string;
+  favoriteBookIds: number[];
   error: HttpErrorResponse | undefined;
 }
 
@@ -17,6 +18,7 @@ export const booksAdapter: EntityAdapter<Book> = createEntityAdapter<Book>();
 export const initialState: BookState = booksAdapter.getInitialState({
   loading: false,
   filter: '',
+  favoriteBookIds: [],
   error: undefined,
 });
 
@@ -47,6 +49,20 @@ export const reducer = createReducer(
       ...state,
       error: undefined,
     });
+  }),
+
+  on(BookActions.addFavoriteBook, (state, { bookId }): BookState => {
+    return {
+      ...state,
+      favoriteBookIds: [...state.favoriteBookIds, bookId],
+    };
+  }),
+
+  on(BookActions.removeFavoriteBook, (state, { bookId }): BookState => {
+    return {
+      ...state,
+      favoriteBookIds: state.favoriteBookIds.filter((id) => id !== bookId),
+    };
   }),
 
   on(

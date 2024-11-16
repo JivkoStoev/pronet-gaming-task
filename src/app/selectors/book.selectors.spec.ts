@@ -42,6 +42,7 @@ describe('Book Selectors', () => {
       },
     },
     filter: '',
+    favoriteBookIds: [],
     loading: false,
     error: undefined,
   };
@@ -50,6 +51,7 @@ describe('Book Selectors', () => {
     ids: [],
     entities: {},
     filter: '',
+    favoriteBookIds: [],
     loading: false,
     error: undefined,
   };

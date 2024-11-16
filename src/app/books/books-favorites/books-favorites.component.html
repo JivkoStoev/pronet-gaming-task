@@ -1,1 +1,10 @@
-<p>books-favorites works!</p>
+<ng-container *ngIf="favoriteBooks$ | async as favoriteBooks">
+  <ng-container *ngIf="favoriteBooks.length > 0; else noFavorites">
+    <h2>Your Favorite Books</h2>
+    <app-books-list [books]="favoriteBooks"></app-books-list>
+  </ng-container>
+
+  <ng-template #noFavorites>
+    <p>No favorite books yet! Add some to see them here.</p>
+  </ng-template>
+</ng-container>

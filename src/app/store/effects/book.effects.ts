@@ -4,7 +4,7 @@ import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { BookActions } from '../actions/book.actions';
 import { BookService } from '../../books/services/book.service';
-import { Book } from 'src/app/books/models/book.model';
+import { Book } from '../../books/models/book.model';
 
 @Injectable()
 export class BookEffects {

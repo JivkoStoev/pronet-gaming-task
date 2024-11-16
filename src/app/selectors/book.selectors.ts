@@ -24,3 +24,17 @@ export const selectFilteredBooks = createSelector(selectBooks, selectFilter, (bo
   if (!filter) return books;
   return books.filter((book) => book.name.toLowerCase().startsWith(filter.toLowerCase()));
 });
+
+export const selectFavoriteBookIds = createSelector(
+  getBooksState,
+  (state) => state.favoriteBookIds,
+);
+
+export const selectIsBookFavorite = (bookId: number) =>
+  createSelector(selectFavoriteBookIds, (favorites) => favorites.includes(bookId));
+
+export const selectFavoriteBooks = createSelector(
+  selectBooks,
+  selectFavoriteBookIds,
+  (books, favoriteBookIds) => books.filter((book) => favoriteBookIds.includes(book.id)),
+);

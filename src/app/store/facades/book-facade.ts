@@ -5,7 +5,10 @@ import {
   selectBookById,
   selectBooks,
   selectBooksLoading,
+  selectFavoriteBookIds,
+  selectFavoriteBooks,
   selectFilteredBooks,
+  selectIsBookFavorite,
 } from '../../selectors/book.selectors';
 import { AppState } from '../reducers';
 import { filter, Observable, switchMap } from 'rxjs';
@@ -18,8 +21,8 @@ export class BookFacade {
   getAllBooks$ = this.store.select(selectBooks);
   getFilteredBooks$ = this.store.select(selectFilteredBooks);
   getBooksLoading$ = this.store.select(selectBooksLoading);
-
-  // TO DO add favourites
+  getFavoriteBookIds$ = this.store.select(selectFavoriteBookIds);
+  getFavoriteBooks$ = this.store.select(selectFavoriteBooks);
 
   loadBooks() {
     this.store.dispatch(BookActions.loadBooks());
@@ -39,5 +42,17 @@ export class BookFacade {
       filter((isLoading) => !isLoading),
       switchMap(() => this.store.select(selectBookById(bookId))),
     );
+  }
+
+  isFavorite$(bookId: number): Observable<boolean> {
+    return this.store.select(selectIsBookFavorite(bookId));
+  }
+
+  addFavorite(bookId: number): void {
+    this.store.dispatch(BookActions.addFavoriteBook({ bookId }));
+  }
+
+  removeFavorite(bookId: number): void {
+    this.store.dispatch(BookActions.removeFavoriteBook({ bookId }));
   }
 }
