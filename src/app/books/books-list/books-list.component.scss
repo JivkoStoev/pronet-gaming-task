@@ -1,17 +1,15 @@
 :host {
   display: flex;
   flex-wrap: wrap;
-  // flex-direction: row;
   gap: 10px;
 
   .books-card {
-    max-width: 334px;
+    width: 334px;
   }
 
   @media (max-width: 1024px) {
     .books-card {
       flex-direction: column;
-      max-width: 100%;
       width: 100%;
     }
   }

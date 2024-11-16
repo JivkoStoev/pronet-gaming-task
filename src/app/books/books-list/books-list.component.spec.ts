@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BooksListComponent } from './books-list.component';
 import { By } from '@angular/platform-browser';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Book } from '../models/book.model';
+import { BookListItemComponent } from '../book-list-item/book-list-item.component';
 
 describe('BooksListComponent', () => {
   let component: BooksListComponent;
@@ -46,14 +43,7 @@ describe('BooksListComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        BooksListComponent,
-        CommonModule,
-        MatCardModule,
-        MatDividerModule,
-        MatButtonModule,
-        MatIconModule,
-      ],
+      imports: [BooksListComponent, BookListItemComponent, CommonModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BooksListComponent);

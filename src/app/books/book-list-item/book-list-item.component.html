@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ book.name }}</mat-card-title>
+    <mat-card-subtitle>Authors: {{ book.authors }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Publisher: <b>{{ book.publisher }}</b>
+    </p>
+    <p>
+      Number of Pages: <b>{{ book.numberOfPages }}</b>
+    </p>
+    <p>
+      Release Date: <b>{{ book.released | date }}</b>
+    </p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button><mat-icon>favorite</mat-icon></button>
+  </mat-card-actions>
+</mat-card>
