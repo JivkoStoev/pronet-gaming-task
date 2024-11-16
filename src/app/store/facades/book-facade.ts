@@ -19,7 +19,6 @@ export class BookFacade {
   getFilteredBooks$ = this.store.select(selectFilteredBooks);
   getBooksLoading$ = this.store.select(selectBooksLoading);
 
-  // TO DO add loader
   // TO DO add favourites
 
   loadBooks() {
