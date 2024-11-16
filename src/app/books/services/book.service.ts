@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Book } from '../models/book.model';
 
 @Injectable({
@@ -18,6 +18,21 @@ export class BookService {
           return { ...book, id: index + 1 }; // there isn't id field for book
         }),
       ),
+      catchError(() => {
+        return throwError('Failed to fetch books');
+      }),
+    );
+  }
+
+  getBookById(bookId: number): Observable<Book> {
+    return this.httpClient.get<Book>(`${this.apiBaseUrl}books/${bookId}`).pipe(
+      map((book) => ({
+        ...book,
+        id: +bookId,
+      })),
+      catchError(() => {
+        return throwError('Book not found');
+      }),
     );
   }
 }

@@ -13,6 +13,11 @@ export const selectBooks = createSelector(getBooksState, (state: BookState) => {
     : [];
 });
 
+export const selectBookById = (bookId: number) =>
+  createSelector(getBooksState, (state: BookState) => {
+    return state?.entities ? state.entities[bookId] : undefined;
+  });
+
 export const selectFilter = createSelector(getBooksState, (state: BookState) => state.filter);
 
 export const selectFilteredBooks = createSelector(selectBooks, selectFilter, (books, filter) => {

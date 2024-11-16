@@ -1,0 +1,19 @@
+<mat-card *ngIf="book$ | async as book" class="book-detail-card">
+  <mat-card-header>
+    <mat-card-title>{{ book.name }}</mat-card-title>
+    <mat-card-subtitle>{{ book.authors }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="book-meta">
+      <div><strong>ISBN:</strong> {{ book.isbn }}</div>
+      <div><strong>Number of Pages:</strong> {{ book.numberOfPages }}</div>
+      <div><strong>Publisher:</strong> {{ book.publisher }}</div>
+      <div><strong>Release Date:</strong> {{ book.released | date: 'fullDate' }}</div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button mat-button (click)="onBackClicked()"><mat-icon>arrow_back</mat-icon> Back</button>
+  </mat-card-actions>
+</mat-card>

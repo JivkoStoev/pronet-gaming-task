@@ -3,6 +3,7 @@ import {
   getBooksState,
   selectBooks,
   selectFilteredBooks,
+  selectBookById,
 } from './book.selectors';
 import { BookState } from '../reducers/book.reducer';
 import { Book } from '../books/models/book.model';
@@ -112,6 +113,20 @@ describe('Book Selectors', () => {
       );
 
       expect(filteredBooks.length).toBe(2);
+    });
+  });
+
+  describe('selectBookById', () => {
+    it('should return the correct book when it exists in the state', () => {
+      const bookId = 1;
+      const result = selectBookById(bookId).projector(mockBooks);
+      expect(result).toEqual(mockBooks.entities[bookId]);
+    });
+
+    it('should return undefined when the book does not exist in the state', () => {
+      const bookId = 3;
+      const result = selectBookById(bookId).projector(mockBooks);
+      expect(result).toBeUndefined();
     });
   });
 });

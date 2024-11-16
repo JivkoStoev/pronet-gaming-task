@@ -22,13 +22,13 @@ export const initialState: BookState = booksAdapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(BookActions.loadBooks, (state): BookState => {
+  on(BookActions.loadBooks, BookActions.loadBookById, (state): BookState => {
     return {
       ...state,
       loading: true,
     };
   }),
-  on(BookActions.loadBooksFailure, BookActions.loadBooksSuccess, (state): BookState => {
+  on(BookActions.loadBooksSuccess, BookActions.loadBookByIdSuccess, (state): BookState => {
     return {
       ...state,
       loading: false,
@@ -36,8 +36,29 @@ export const reducer = createReducer(
   }),
 
   on(BookActions.loadBooksSuccess, (state, { books }): BookState => {
-    return booksAdapter.addMany(books, state);
+    return booksAdapter.addMany(books, {
+      ...state,
+      error: undefined,
+    });
   }),
+
+  on(BookActions.loadBookByIdSuccess, (state, { book }): BookState => {
+    return booksAdapter.addOne(book, {
+      ...state,
+      error: undefined,
+    });
+  }),
+
+  on(
+    BookActions.loadBookByIdFailure,
+    BookActions.loadBooksFailure,
+    (state, { error }): BookState => ({
+      ...state,
+      loading: false,
+      error,
+    }),
+  ),
+
   on(BookActions.setBooksFilter, (state, { filter }): BookState => {
     return {
       ...state,

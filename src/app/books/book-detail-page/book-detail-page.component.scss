@@ -1,0 +1,36 @@
+.book-detail-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.mat-mdc-card-content {
+  padding: 16px;
+}
+
+.book-meta {
+  margin-bottom: 16px;
+}
+
+.book-meta div {
+  margin-bottom: 8px;
+}
+
+mat-card-header {
+  border-radius: 8px 8px 0 0;
+}
+
+mat-card-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  color: #757575;
+}
+
+button {
+  margin-left: auto;
+}
