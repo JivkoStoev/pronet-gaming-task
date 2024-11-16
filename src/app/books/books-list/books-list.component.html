@@ -1,7 +1,8 @@
-<mat-card class="books-card">
+<!-- TO DO add book list item component -->
+<mat-card class="books-card" *ngFor="let book of books; trackBy: trackByBook">
   <mat-card-header>
-    <mat-card-title>Book title</mat-card-title>
-    <mat-card-subtitle>subtitle</mat-card-subtitle>
+    <mat-card-title>{{ book.name }}</mat-card-title>
+    <mat-card-subtitle>Authors: {{ book.authors }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <p>This card has divider and indeterminate progress as footer</p>

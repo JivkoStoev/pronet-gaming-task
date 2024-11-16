@@ -1,0 +1,5 @@
+<!-- TO DO add filter -->
+
+<ng-container *ngIf="books$ | async as books">
+  <app-books-list [books]="books"></app-books-list>
+</ng-container>

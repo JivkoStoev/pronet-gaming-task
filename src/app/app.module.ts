@@ -11,12 +11,14 @@ import { ShellModule } from './shell/shell.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ShellModule,
     StoreModule.forRoot(reducers, {
       metaReducers,

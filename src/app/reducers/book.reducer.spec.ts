@@ -41,7 +41,36 @@ describe('Books Reducer', () => {
   });
 
   describe('Entity Selectors', () => {
-    const mockBooks: Book[] = [{ id: '1' }, { id: '2' }];
+    const mockBooks: Book[] = [
+      {
+        id: 1,
+        'url': 'https://anapioficeandfire.com/api/books/1',
+        'name': 'A Game of Thrones',
+        'isbn': '978-0553103540',
+        'authors': ['George R. R. Martin'],
+        'numberOfPages': 694,
+        'publisher': 'Bantam Books',
+        'country': 'United States',
+        'mediaType': 'Hardcover',
+        'released': '1996-08-01T00:00:00',
+        'characters': ['https://anapioficeandfire.com/api/characters/2'],
+        'povCharacters': ['https://anapioficeandfire.com/api/characters/148'],
+      },
+      {
+        id: 2,
+        'url': 'https://anapioficeandfire.com/api/books/2',
+        'name': 'A Game of Thrones 2',
+        'isbn': '978-0553103540',
+        'authors': ['George R. R. Martin'],
+        'numberOfPages': 694,
+        'publisher': 'Bantam Books 2',
+        'country': 'United States 2',
+        'mediaType': 'Hardcover 2',
+        'released': '1996-08-01T00:00:00',
+        'characters': ['https://anapioficeandfire.com/api/characters/2'],
+        'povCharacters': ['https://anapioficeandfire.com/api/characters/148'],
+      },
+    ];
 
     let state: BookState;
 

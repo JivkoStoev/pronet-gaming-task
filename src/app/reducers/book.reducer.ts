@@ -15,8 +15,6 @@ export const booksAdapter: EntityAdapter<Book> = createEntityAdapter<Book>();
 
 export const initialState: BookState = booksAdapter.getInitialState({
   loading: false,
-  ids: [],
-  entities: {},
   error: undefined,
 });
 
@@ -33,6 +31,10 @@ export const reducer = createReducer(
       ...state,
       loading: false,
     };
+  }),
+
+  on(BookActions.loadBooksSuccess, (state, { books }): BookState => {
+    return booksAdapter.addMany(books, state);
   }),
 );
 
