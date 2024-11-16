@@ -25,19 +25,16 @@
         <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
         <span routerLink="/home" class="app-label">Books App</span>
         <nav>
-          <a (click)="sidenav.toggle()" routerLink="/home" routerLinkActive="active">Home</a>
+          <a routerLink="/home" routerLinkActive="active">Home</a>
           <a
-            (click)="sidenav.toggle()"
             routerLink="books"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             >Books</a
           >
-          <a (click)="sidenav.toggle()" routerLink="books/favorites" routerLinkActive="active"
-            >Favorites</a
-          >
-          <a (click)="sidenav.toggle()" routerLink="login" routerLinkActive="active">Login</a>
-          <a (click)="sidenav.toggle()" routerLink="sign-up" routerLinkActive="active">Sign Up</a>
+          <a routerLink="books/favorites" routerLinkActive="active">Favorites</a>
+          <a routerLink="login" routerLinkActive="active">Login</a>
+          <a routerLink="sign-up" routerLinkActive="active">Sign Up</a>
         </nav>
       </header>
     </mat-toolbar>

@@ -75,6 +75,10 @@
 }
 
 @media screen and (max-width: 1023px) {
+  .app-label {
+    margin: 0 auto;
+  }
+
   .mat-sidenav-container .mat-sidenav-content {
     .mat-toolbar {
       padding-right: 10px;
