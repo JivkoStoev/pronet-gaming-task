@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Book } from '../models/book.model';
 import { BookListItemComponent } from '../book-list-item/book-list-item.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('BooksListComponent', () => {
   let component: BooksListComponent;
@@ -44,6 +46,7 @@ describe('BooksListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [BooksListComponent, BookListItemComponent, CommonModule],
+      providers: [{ provide: ActivatedRoute, useValue: { params: of({}) } }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BooksListComponent);

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
@@ -5,5 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './books-favorites.component.html',
   styleUrls: ['./books-favorites.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class BooksFavoritesComponent {}

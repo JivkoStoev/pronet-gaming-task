@@ -1,5 +1,8 @@
-<!-- TO DO add filter -->
-
+<app-filter
+  [label]="'Filter by Title'"
+  [placeholder]="'Enter book title'"
+  (filterChanged)="onFilterChanged($event)"
+/>
 <ng-container *ngIf="books$ | async as books">
   <app-books-list [books]="books"></app-books-list>
 </ng-container>

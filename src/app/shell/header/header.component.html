@@ -1,6 +1,6 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="over">
-    <span class="app-label">Books App</span>
+    <span routerLink="/home" class="app-label">Books App</span>
     <hr />
     <nav>
       <a routerLink="/home" routerLinkActive="active">Home</a>
@@ -15,7 +15,7 @@
     <mat-toolbar color="primary">
       <header>
         <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-        <span class="app-label">Books App</span>
+        <span routerLink="/home" class="app-label">Books App</span>
         <nav>
           <a routerLink="/home" routerLinkActive="active">Home</a>
           <a routerLink="books" routerLinkActive="active">Books</a>

@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { Book } from '../models/book.model';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('BookListItemComponent', () => {
   let component: BookListItemComponent;
@@ -34,6 +35,7 @@ describe('BookListItemComponent', () => {
         MatDividerModule,
         MatButtonModule,
         MatIconModule,
+        RouterTestingModule,
       ],
     });
     fixture = TestBed.createComponent(BookListItemComponent);

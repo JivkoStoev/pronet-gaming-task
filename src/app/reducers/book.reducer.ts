@@ -8,6 +8,7 @@ export const booksFeatureKey = 'books';
 
 export interface BookState extends EntityState<Book> {
   loading: boolean;
+  filter: string;
   error: HttpErrorResponse | undefined;
 }
 
@@ -15,6 +16,7 @@ export const booksAdapter: EntityAdapter<Book> = createEntityAdapter<Book>();
 
 export const initialState: BookState = booksAdapter.getInitialState({
   loading: false,
+  filter: '',
   error: undefined,
 });
 
@@ -35,6 +37,12 @@ export const reducer = createReducer(
 
   on(BookActions.loadBooksSuccess, (state, { books }): BookState => {
     return booksAdapter.addMany(books, state);
+  }),
+  on(BookActions.setBooksFilter, (state, { filter }): BookState => {
+    return {
+      ...state,
+      filter,
+    };
   }),
 );
 

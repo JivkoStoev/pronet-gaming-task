@@ -1,4 +1,9 @@
-import { selectBooksLoading, getBooksState, selectBooks } from './book.selectors';
+import {
+  selectBooksLoading,
+  getBooksState,
+  selectBooks,
+  selectFilteredBooks,
+} from './book.selectors';
 import { BookState } from '../reducers/book.reducer';
 import { Book } from '../books/models/book.model';
 
@@ -35,6 +40,7 @@ describe('Book Selectors', () => {
         povCharacters: ['https://anapioficeandfire.com/api/characters/148'],
       },
     },
+    filter: '',
     loading: false,
     error: undefined,
   };
@@ -42,6 +48,7 @@ describe('Book Selectors', () => {
   const emptyState: BookState = {
     ids: [],
     entities: {},
+    filter: '',
     loading: false,
     error: undefined,
   };
@@ -82,6 +89,29 @@ describe('Book Selectors', () => {
     it('should return an empty array if no books are present', () => {
       const result = selectBooks.projector(emptyState);
       expect(result).toEqual([]);
+    });
+  });
+
+  describe('selectFilteredBooks', () => {
+    it('should return filtered books based on the filter string', () => {
+      const filter = 'A Game';
+      const filteredBooks = selectFilteredBooks.projector(
+        Object.values(mockBooks.entities).filter((book): book is Book => book !== undefined),
+        filter,
+      );
+
+      expect(filteredBooks.length).toBe(1);
+      expect(filteredBooks[0].name).toBe('A Game of Thrones');
+    });
+
+    it('should return all books if filter is empty', () => {
+      const filter = '';
+      const filteredBooks = selectFilteredBooks.projector(
+        Object.values(mockBooks.entities).filter((book): book is Book => book !== undefined),
+        filter,
+      );
+
+      expect(filteredBooks.length).toBe(2);
     });
   });
 });

@@ -8,7 +8,7 @@ describe('BooksFavoritesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BooksFavoritesComponent],
+      imports: [BooksFavoritesComponent],
     });
     fixture = TestBed.createComponent(BooksFavoritesComponent);
     component = fixture.componentInstance;

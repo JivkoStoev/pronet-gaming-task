@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -9,9 +7,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
-  { path: 'home', component: HomeComponent },
+  {
+    path: 'home',
+    loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
+  },
   { path: 'books', loadChildren: () => import('./books/books.module').then((m) => m.BooksModule) },
-  { path: '**', component: PageNotFoundComponent },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/page-not-found/page-not-found.component').then(
+        (m) => m.PageNotFoundComponent,
+      ),
+  },
 ];
 
 @NgModule({

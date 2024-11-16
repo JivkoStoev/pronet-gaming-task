@@ -12,3 +12,10 @@ export const selectBooks = createSelector(getBooksState, (state: BookState) => {
     ? Object.values(state.entities).filter((book): book is Book => book !== undefined)
     : [];
 });
+
+export const selectFilter = createSelector(getBooksState, (state: BookState) => state.filter);
+
+export const selectFilteredBooks = createSelector(selectBooks, selectFilter, (books, filter) => {
+  if (!filter) return books;
+  return books.filter((book) => book.name.toLowerCase().startsWith(filter.toLowerCase()));
+});

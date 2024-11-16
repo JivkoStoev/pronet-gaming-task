@@ -2,9 +2,12 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BooksPageComponent } from './books-page.component';
 import { BookFacade } from 'src/app/store/facades/book-facade';
-import { instance, mock, when } from 'ts-mockito';
+import { instance, mock, when, verify } from 'ts-mockito';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterComponent } from '../../components/filter/filter.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('BooksPageComponent', () => {
   let component: BooksPageComponent;
@@ -45,11 +48,15 @@ describe('BooksPageComponent', () => {
   beforeEach(() => {
     bookFacade = mock(BookFacade);
 
-    when(bookFacade.getAllBooks$).thenReturn(of(mockBooks));
+    when(bookFacade.getFilteredBooks$).thenReturn(of(mockBooks));
+    when(bookFacade.getBooksLoading$).thenReturn(of(false));
 
     TestBed.configureTestingModule({
-      imports: [BooksPageComponent, HttpClientTestingModule],
-      providers: [{ provide: BookFacade, useFactory: () => instance(bookFacade) }],
+      imports: [BooksPageComponent, HttpClientTestingModule, BrowserAnimationsModule],
+      providers: [
+        { provide: BookFacade, useFactory: () => instance(bookFacade) },
+        { provide: ActivatedRoute, useValue: { params: of({}) } },
+      ],
     });
 
     fixture = TestBed.createComponent(BooksPageComponent);
@@ -62,7 +69,7 @@ describe('BooksPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load books and pass them to the BooksListComponent', fakeAsync(() => {
+  it('should load filtered books and pass them to the BooksListComponent', fakeAsync(() => {
     tick();
     fixture.detectChanges();
 
@@ -72,11 +79,37 @@ describe('BooksPageComponent', () => {
     expect(booksListComponent.books).toEqual(mockBooks);
   }));
 
-  it('should display the correct number of books', fakeAsync(() => {
+  it('should display the correct number of books in the BooksListComponent', fakeAsync(() => {
     tick();
     fixture.detectChanges();
 
-    const bookElements = fixture.debugElement.queryAll(By.css('mat-card'));
+    const bookElements = fixture.debugElement.queryAll(By.css('app-books-list mat-card'));
     expect(bookElements.length).toBe(mockBooks.length);
   }));
+
+  it('should handle filter changes and update the store', fakeAsync(() => {
+    const filterComponent = fixture.debugElement.query(By.directive(FilterComponent))
+      .componentInstance as FilterComponent;
+
+    const filterValue = 'A Game of Thrones';
+
+    filterComponent.filterChanged.emit(filterValue);
+    tick();
+    fixture.detectChanges();
+
+    verify(bookFacade.setFilter(filterValue)).once();
+  }));
+
+  it('should render the FilterComponent', () => {
+    const filterElement = fixture.debugElement.query(By.directive(FilterComponent));
+    expect(filterElement).toBeTruthy();
+  });
+
+  it('should pass the correct label and placeholder to the FilterComponent', () => {
+    const filterComponent = fixture.debugElement.query(By.directive(FilterComponent))
+      .componentInstance as FilterComponent;
+
+    expect(filterComponent.label).toBe('Filter by Title');
+    expect(filterComponent.placeholder).toBe('Enter book title');
+  });
 });

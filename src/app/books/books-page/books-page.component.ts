@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BooksListComponent } from '../books-list/books-list.component';
 import { BookFacade } from '../../store/facades/book-facade';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Book } from '../models/book.model';
+import { FilterComponent } from '../../components/filter/filter.component';
 
 @Component({
   selector: 'app-books-page',
   standalone: true,
-  imports: [CommonModule, BooksListComponent],
+  imports: [CommonModule, BooksListComponent, FilterComponent],
   templateUrl: './books-page.component.html',
   styleUrls: ['./books-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,7 +23,11 @@ export class BooksPageComponent implements OnInit {
   ngOnInit(): void {
     this.bookFacade.loadBooks();
 
-    this.books$ = this.bookFacade.getAllBooks$.pipe(tap((books) => console.log(books)));
+    this.books$ = this.bookFacade.getFilteredBooks$;
     this.booksLoader$ = this.bookFacade.getBooksLoading$;
+  }
+
+  onFilterChanged(filter: string): void {
+    this.bookFacade.setFilter(filter);
   }
 }

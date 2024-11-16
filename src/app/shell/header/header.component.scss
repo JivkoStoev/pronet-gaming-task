@@ -1,6 +1,15 @@
 .mat-sidenav-container {
   height: 100vh;
 
+  .app-label {
+    cursor: pointer;
+    color: #fff;
+    font:
+      500 20px/32px Roboto,
+      'Helvetica Neue',
+      sans-serif;
+  }
+
   .mat-sidenav {
     background-color: #3f51b5;
     padding: 10px;
@@ -13,27 +22,19 @@
         outline: 0px;
         margin: 5px 0px;
         text-decoration: none;
-        color: white;
+        color: #fff;
         padding: 5px 15px;
         border-radius: 5px;
 
         &:hover {
-          color: yellow;
+          color: #ffff00;
         }
 
         .mat-sidenav-container .mat-sidenav nav a.active {
-          color: yellow;
+          color: #ffff00;
           background-color: rgba(0, 0, 0, 0.2);
         }
       }
-    }
-
-    .app-label {
-      color: white;
-      font:
-        500 20px/32px Roboto,
-        'Helvetica Neue',
-        sans-serif;
     }
   }
 
@@ -47,17 +48,17 @@
       width: 100%;
 
       nav a {
-        color: white;
+        color: #fff;
         padding: 5px 10px;
         margin-left: 5px;
         text-decoration: none;
         border-radius: 5px;
         font-size: 1rem;
         &:hover {
-          color: yellow;
+          color: #ffff00;
         }
         &.active {
-          color: yellow;
+          color: #ffff00;
           background-color: rgba(0, 0, 0, 0.2);
         }
       }

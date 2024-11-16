@@ -8,5 +8,6 @@ export const BookActions = createActionGroup({
     'Load Books': emptyProps(),
     'Load Books Success': props<{ books: Book[] }>(),
     'Load Books Failure': props<{ error: HttpErrorResponse }>(),
+    'Set Books Filter': props<{ filter: string }>(),
   },
 });
